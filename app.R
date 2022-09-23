@@ -1,5 +1,5 @@
 # Image classification app
-#
+# link to download the images: https://www.dropbox.com/t/qdIk8cmtLt2oyQuK
 d <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(d)
 
