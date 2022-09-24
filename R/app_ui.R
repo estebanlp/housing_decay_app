@@ -35,7 +35,9 @@ app_ui <- function(request) {
           imageOutput(outputId = "sideA")
         )
       ),
-      surveyOutput(df = housingdecay::radioB_question)
+      surveyOutput(df = rbind(
+        housingdecay::radioB_question,
+        housingdecay::matrix_question))
     )
   )
 }

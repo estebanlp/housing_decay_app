@@ -43,6 +43,41 @@ usethis::use_data(radioB_question, overwrite = T)
 
 ####
 
+matrix_question <- tibble(
+  question = c(
+    rep("Q6a: Does these images look Safe", 4),
+    rep("Q6b: Does these images look Lively", 4),
+    rep("Q6c: Does these images look Beautiful", 4),
+    rep("Q6d: Does these images look Wealthy", 4),
+    rep("Q6e: Does these images look Boring", 4),
+    rep("Q6f: Does these images look Depressing", 4)
+  ),
+  option =  rep(c(
+    "1- Agree",
+    "2 - Neutral",
+    "3 - Disagree",
+    "4 - Cannot tell"
+  ), 6),
+  # input_type = "matrix",
+  input_type = "mc",
+  # input_id = "ranks",
+  input_id = c(
+    rep("q6_safe", 4),
+    rep("q6_lively", 4),
+    rep("q6_beautiful", 4),
+    rep("q6_wealthy", 4),
+    rep("q6_boring", 4),
+    rep("q6_depressing", 4)
+  ),
+  required = TRUE,
+  dependence = NA,
+  dependence_value = NA
+)
+
+usethis::use_data(matrix_question, overwrite = T)
+
+####
+
 #index creator
 treated<-paste0(0:81,"/")
 control<-paste0(0:81,"_n/")

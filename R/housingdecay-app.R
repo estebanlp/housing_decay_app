@@ -19,5 +19,18 @@ NULL
 #' @name radioB_question
 #' @usage radioB_question
 #' @source Own research
-#' @format A data frame with 9 questions to be completed via Shiny by the survey respondents
+#' @format A data frame with 5 questions to be completed via Shiny by the survey respondents
 NULL
+
+#' matrix_question
+#'
+#' Question in survey format
+#'
+#' @docType data
+#' @keywords datasets
+#' @name matrix_question
+#' @usage matrix_question
+#' @source Own research
+#' @format A data frame with 1 question to be completed via Shiny by the survey respondents
+NULL
+

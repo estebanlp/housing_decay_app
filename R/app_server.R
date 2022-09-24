@@ -88,7 +88,7 @@ app_server <- function(input, output, session) {
     # print(as.character(input$image_id))
     out <- data.frame(
         image = gsub("images", "", gsub(".*/images|/", "", as.character(image_id()))),
-        question = paste0("Q", 1:5),
+        question = c(paste0("Q", 1:5), paste0("Q6", letters[1:6])),
         responses = responses
       )
     answers <- rbind(answers, out)

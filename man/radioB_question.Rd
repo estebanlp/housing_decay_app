@@ -5,7 +5,7 @@
 \alias{radioB_question}
 \title{radioB_question}
 \format{
-A data frame with 9 questions to be completed via Shiny by the survey respondents
+A data frame with 5 questions to be completed via Shiny by the survey respondents
 }
 \source{
 Own research
