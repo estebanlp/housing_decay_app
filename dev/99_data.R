@@ -1,18 +1,45 @@
-radioB_question <- data.frame(
-  question = c("Is this house showing signs of roof damage?", "Is this house showing signs of roof damage?","Is this house showing signs of roof damage?",
-               "Is this house showing signs of foundation defects?","Is this house showing signs of foundation defects?","Is this house showing signs of foundation defects?",
-               "Is this house showing signs of exterior wall damage?","Is this house showing signs of exterior wall damage?","Is this house showing signs of exterior wall damage?"),
-  option =  c("Yes","No","Not visible","Yes","No","Not visible","Yes","No","Not visible"),
-  input_type = c("mc","mc","mc","mc","mc","mc","mc","mc","mc"),
-  input_id = c("house_decay","house_decay","house_decay",
-               "foundation_decay","foundation_decay","foundation_decay",
-               "exterior_wall_decay","exterior_wall_decay","exterior_wall_decay"),
-  dependence = NA,
-  dependence_value = NA,
-  required = c(TRUE,TRUE,TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)
+library(dplyr)
+
+q1 <- tibble(
+  question = rep("Q1: Is this house showing signs of decay?", 3),
+  option =  c(
+    "1- Yes",
+    "2 - No",
+    "3 - Not visible"
+  ),
+  input_type = c("mc"),
+  input_id = rep("house_decay", 3),
+  required = TRUE
 )
 
-usethis::use_data(radioB_question)
+q2_q5 <- tibble(
+  question = c(
+    rep("Q2: Is this house showing signs of roof damage?", 4),
+    rep("Q3: Is this house showing signs of windows and doors damage?", 4),
+    rep("Q4: Is this house showing signs of walls damage?", 4),
+    rep("Q5: Is this house showing signs of foundation damage?", 4)
+  ),
+  option =  rep(c(
+    "1 - Good",
+    "2 - Moderate",
+    "3 - Severe",
+    "4 - Not visible"
+  ), 4),
+  input_type = c("mc"),
+  input_id = c(
+    rep("roof_damage", 4),
+    rep("windowsdoors_damage", 4),
+    rep("walls_damage", 4),
+    rep("foundation_damage", 4)
+  ),
+  dependence = NA,
+  dependence_value = NA,
+  required = TRUE
+)
+
+radioB_question <- bind_rows(q1, q2_q5)
+
+usethis::use_data(radioB_question, overwrite = T)
 
 ####
 

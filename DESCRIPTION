@@ -3,8 +3,8 @@ Title: Housing Decay Evaluation
 Version: 0.0.0.9000
 Authors@R: 
     person("Esteban", "Lopez", , "esteban.lopezochoa@utsa.edu", role = c("cre", "aut"))
-Description: Housing Decay Evaluation. The idea of this app is to ease recording
-    subjective user's evaluation on real estate.
+Description: Housing Decay Evaluation. The idea of this app is to ease
+    recording subjective user's evaluation on real estate.
 License: MIT + file LICENSE
 URL: https://github.com/estebanlp/housing_decay_app
 BugReports: https://github.com/estebanlp/housing_decay_app/issues
@@ -13,13 +13,13 @@ Depends:
 Imports: 
     config (>= 0.3.1),
     golem,
+    purrr,
     shiny (>= 1.7.2),
     shinysurveys,
     utils
 Suggests: 
     spelling,
-    testthat (>= 3.0.0),
-    usethis
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
