@@ -37,3 +37,5 @@ Open the shiny app with:
 ```{r example, eval = FALSE}
 housingdecay::run_app()
 ```
+
+The output is saved at `~/housingdecay_output` (i.e., In Documents on Windows)
