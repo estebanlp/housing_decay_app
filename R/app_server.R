@@ -125,6 +125,7 @@ app_server <- function(input, output, session) {
         responses = responses$response
       )
 
+    out$responses <- ifelse(out$responses == "", NA, out$responses)
     print(out)
 
     incomplete <- any(is.na(out$responses))

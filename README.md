@@ -24,6 +24,9 @@ You can install the development version of housingdecay from
 3.  Select install from tar.gz and pick the downloaded file, then click
     “Install”
 
+Note: If you download from Safari, then manually rename the file to have
+extension tar.gz (not .tar) and follow steps 1-3.
+
 ## Example
 
 Open the shiny app with:
