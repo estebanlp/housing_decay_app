@@ -1,3 +1,5 @@
+jsResetCode <- "shinyjs.reset = function() {history.go(0)}"
+
 #' The application server-side
 #'
 #' @param input,output,session Internal parameters for {shiny}.
@@ -8,7 +10,7 @@
 #' @importFrom purrr map_df
 #' @importFrom dplyr tibble bind_rows
 #' @importFrom tidyr pivot_wider
-#' @importFrom readr read_csv write_csv
+#' @importFrom readr read_csv write_csv cols col_character
 #' @noRd
 app_server <- function(input, output, session) {
   dout <- "~/housingdecay_output/"
@@ -16,7 +18,12 @@ app_server <- function(input, output, session) {
 
   inp <- list.files(dout, full.names = TRUE)
   if (length(inp) > 0L) {
-    answers <- map_df(inp, read_csv)
+    answers <- map_df(
+      inp,
+      function(x) {
+        read_csv(x, col_types = cols(image = col_character()))
+      }
+    )
   } else {
     answers <- tibble(
       image = NULL,
@@ -35,10 +42,11 @@ app_server <- function(input, output, session) {
     )
   }
 
+  dd <- housingdecay::ds[is.na(housingdecay::ds$HD_d), ]
+  dd$image <- gsub("images|/", "", dd$h_id)
+  dd <- dd[!dd$image %in% unique(answers$image), ]
+
   image_id <- eventReactive(input$next_image, {
-    dd <- housingdecay::ds[is.na(housingdecay::ds$HD_d), ]
-    dd$image <- gsub("images|/", "", dd$h_id)
-    dd <- dd[!dd$image %in% unique(answers$image), ]
     sample(dd$h_id, size = 1)
   })
 
@@ -89,11 +97,11 @@ app_server <- function(input, output, session) {
 
   renderSurvey()
 
-  observeEvent(input$submit, {
-    showModal(modalDialog(
-      title = "Thank you, click NEXT to see the next house"
-    ))
-  })
+  # observeEvent(input$submit, {
+  #   showModal(modalDialog(
+  #     title = "Thank you, click NEXT to see the next house"
+  #   ))
+  # })
 
   observeEvent(input$submit, {
     responses <- getSurveyData()[, 4]
@@ -112,6 +120,9 @@ app_server <- function(input, output, session) {
     # answers <- bind_rows(answers, out)
     # print(answers)
 
-    write_csv(out, file = paste0(dout, gsub("\\s+|:", "_", Sys.time()), ".csv"))
+    fout <- gsub("_n", "n", gsub("/", "", paste0(gsub("images/", "", image_id()), "_", gsub("\\s+|:", "_", Sys.time()), ".csv")))
+    # print(fout)
+    write_csv(out, file = paste0(dout, fout))
+    session$reload()
   })
 }

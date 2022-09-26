@@ -12,9 +12,9 @@ app_ui <- function(request) {
     # Your application UI logic
     fluidPage(
       titlePanel("San Antonio Housing Decay Project - UTSA-Planning"),
-      actionButton(inputId = "begin_session", label = "(Re)Start session"),
+      # actionButton(inputId = "restart_session", label = "(Re)Start session"),
       br(),
-      actionButton(inputId = "next_image", label = "Get image"),
+      actionButton(inputId = "next_image", label = "Next image"),
       # numericInput("image_id", "House ID:", 0),
       textOutput("counter"),
       hr(),
