@@ -51,8 +51,7 @@ app_server <- function(input, output, session) {
   })
 
   output$counter <- renderText({
-    dd <- housingdecay::ds[is.na(housingdecay::ds$HD_d), ]
-    paste(dim(dd)[1], "reviewed out of", dim(housingdecay::ds)[1])
+    paste(nrow(dd), "reviewed out of", nrow(housingdecay::ds))
   })
 
   output$sideA <- renderImage(
