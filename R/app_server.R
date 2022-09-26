@@ -8,7 +8,7 @@ jsResetCode <- "shinyjs.reset = function() {history.go(0)}"
 #' @importFrom shinysurveys renderSurvey getSurveyData
 #' @importFrom utils write.table
 #' @importFrom purrr map_df
-#' @importFrom dplyr tibble bind_rows full_join select
+#' @importFrom dplyr tibble bind_rows left_join select
 #' @importFrom rlang sym
 #' @importFrom tidyr pivot_wider
 #' @importFrom readr read_csv write_csv cols col_character
