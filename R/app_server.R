@@ -8,7 +8,8 @@ jsResetCode <- "shinyjs.reset = function() {history.go(0)}"
 #' @importFrom shinysurveys renderSurvey getSurveyData
 #' @importFrom utils write.table
 #' @importFrom purrr map_df
-#' @importFrom dplyr tibble bind_rows
+#' @importFrom dplyr tibble bind_rows full_join select
+#' @importFrom rlang sym
 #' @importFrom tidyr pivot_wider
 #' @importFrom readr read_csv write_csv cols col_character
 #' @noRd
@@ -103,16 +104,40 @@ app_server <- function(input, output, session) {
   # })
 
   observeEvent(input$submit, {
-    responses <- getSurveyData()[, 4]
+    responses <- getSurveyData() %>%
+      select(!!sym("question_id"), !!sym("response"))
+
+    responses <- left_join(housingdecay::allresponses, responses)
+
+    # saveRDS(responses, "~/github/housing_decay_app/responses.rds")
     # write.table(x = as.character(paste(input$image_id, responses, sep = ",")), file = "test.csv", append = T)
     # print(as.character(input$image_id))
 
+    # responses <- as.character(responses)
+    # for (i in seq_along(responses)) {
+    #   responses[i] <- ifelse(is.null(responses[i]), NA, responses[i])
+    # }
     # print(responses)
+
     out <- tibble(
         image = gsub("images", "", gsub(".*/images|/", "", as.character(image_id()))),
         question = c(paste0("q", 1:5), paste0("q6", letters[1:6])),
-        responses = as.character(responses)
+        responses = responses$response
       )
+
+    print(out)
+
+    incomplete <- any(is.na(out$responses))
+
+    if (isTRUE(incomplete)) {
+      return(
+        showModal(modalDialog(
+          title = "Error",
+          "Complete all the questions",
+          easyClose = TRUE
+        ))
+      )
+    }
 
     out <- pivot_wider(out, names_from = "question", values_from = "responses")
 

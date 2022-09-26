@@ -16,6 +16,7 @@ Imports:
     golem,
     purrr,
     readr,
+    rlang,
     shiny (>= 1.7.2),
     shinysurveys,
     tidyr,

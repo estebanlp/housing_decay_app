@@ -4,6 +4,7 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @importFrom shinysurveys surveyOutput
+#' @importFrom dplyr bind_rows
 #' @noRd
 app_ui <- function(request) {
   tagList(
@@ -35,7 +36,7 @@ app_ui <- function(request) {
           imageOutput(outputId = "sideA")
         )
       ),
-      surveyOutput(df = rbind(
+      surveyOutput(df = bind_rows(
         housingdecay::radioB_question,
         housingdecay::matrix_question))
     )

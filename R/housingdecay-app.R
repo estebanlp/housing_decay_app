@@ -34,3 +34,14 @@ NULL
 #' @format A data frame with 1 question to be completed via Shiny by the survey respondents
 NULL
 
+#' allresponses
+#'
+#' Dummy data used to reformat the matrix question in long format
+#'
+#' @docType data
+#' @keywords datasets
+#' @name allresponses
+#' @usage allresponses
+#' @source Own research
+#' @format A data frame with 6 questions to be joined with the survey respondents
+NULL
