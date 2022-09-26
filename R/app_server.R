@@ -5,7 +5,10 @@
 #' @import shiny
 #' @importFrom shinysurveys renderSurvey getSurveyData
 #' @importFrom utils write.table
-#' @importFrom purrr map
+#' @importFrom purrr map_df
+#' @importFrom dplyr tibble bind_rows
+#' @importFrom tidyr pivot_wider
+#' @importFrom readr read_csv write_csv
 #' @noRd
 app_server <- function(input, output, session) {
   dout <- "~/housingdecay_output/"
@@ -13,11 +16,21 @@ app_server <- function(input, output, session) {
 
   inp <- list.files(dout, full.names = TRUE)
   if (length(inp) > 0L) {
-    answers <- readRDS(inp[inp == max(inp)])
+    answers <- map_df(inp, read_csv)
   } else {
-    answers <- data.frame(
+    answers <- tibble(
       image = NULL,
-      question = NULL,
+      q1 = NULL,
+      q2 = NULL,
+      q3 = NULL,
+      q4 = NULL,
+      q5 = NULL,
+      q6a = NULL,
+      q6b = NULL,
+      q6c = NULL,
+      q6d = NULL,
+      q6e = NULL,
+      q6f = NULL,
       responses = NULL
     )
   }
@@ -86,14 +99,19 @@ app_server <- function(input, output, session) {
     responses <- getSurveyData()[, 4]
     # write.table(x = as.character(paste(input$image_id, responses, sep = ",")), file = "test.csv", append = T)
     # print(as.character(input$image_id))
-    out <- data.frame(
+
+    # print(responses)
+    out <- tibble(
         image = gsub("images", "", gsub(".*/images|/", "", as.character(image_id()))),
-        question = c(paste0("Q", 1:5), paste0("Q6", letters[1:6])),
-        responses = responses
+        question = c(paste0("q", 1:5), paste0("q6", letters[1:6])),
+        responses = as.character(responses)
       )
-    answers <- rbind(answers, out)
-    saveRDS(answers, file = paste0(dout, gsub("\\s+|:", "_", Sys.time()), ".rds"))
-    inp <- list.files(dout, full.names = TRUE)
-    map(inp[inp != max(inp)], file.remove)
+
+    out <- pivot_wider(out, names_from = "question", values_from = "responses")
+
+    # answers <- bind_rows(answers, out)
+    # print(answers)
+
+    write_csv(out, file = paste0(dout, gsub("\\s+|:", "_", Sys.time()), ".csv"))
   })
 }

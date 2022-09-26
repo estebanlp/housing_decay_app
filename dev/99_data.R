@@ -58,17 +58,17 @@ matrix_question <- tibble(
     "3 - Disagree",
     "4 - Cannot tell"
   ), 6),
-  # input_type = "matrix",
-  input_type = "mc",
-  # input_id = "ranks",
-  input_id = c(
-    rep("q6_safe", 4),
-    rep("q6_lively", 4),
-    rep("q6_beautiful", 4),
-    rep("q6_wealthy", 4),
-    rep("q6_boring", 4),
-    rep("q6_depressing", 4)
-  ),
+  input_type = "matrix",
+  # input_type = "mc",
+  input_id = "ranks",
+  # input_id = c(
+  #   rep("q6_safe", 4),
+  #   rep("q6_lively", 4),
+  #   rep("q6_beautiful", 4),
+  #   rep("q6_wealthy", 4),
+  #   rep("q6_boring", 4),
+  #   rep("q6_depressing", 4)
+  # ),
   required = TRUE,
   dependence = NA,
   dependence_value = NA
