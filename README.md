@@ -15,12 +15,14 @@ evaluation on real estate.
 ## Installation
 
 You can install the development version of housingdecay from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/) with the next steps:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("estebanlp/housing_decay_app")
-```
+1.  Download the app from:
+    <https://github.com/estebanlp/housing_decay_app/releases/download/v0.0.0.9000/housingdecay_0.0.0.9000.tar.gz>
+2.  In RStudio, go to the bottom-right pane, click on “Packages” and
+    then “Install”.
+3.  Select install from tar.gz and pick the downloaded file, then click
+    “Install”
 
 ## Example
 
