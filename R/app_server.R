@@ -37,7 +37,7 @@ app_server <- function(input, output, session) {
   output$sideA <- renderImage(
     {
       file1 <- system.file(paste0("app/", image_id()), "sideA.jpg", package = "housingdecay")
-      print(file1)
+      print(paste(image_id(), file1, sep = " - "))
       return(list(
         src = file1,
         height = "100%"

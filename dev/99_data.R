@@ -79,16 +79,24 @@ usethis::use_data(matrix_question, overwrite = T)
 ####
 
 #index creator
-treated<-paste0(0:81,"/")
-control<-paste0(0:81,"_n/")
+# treated<-paste0(0:81,"/")
+# control<-paste0(0:81,"_n/")
+# control2<-NULL
+# for(a in 0:81){
+#   control2<-c(control2,paste0(control[a+1],dir(control[a+1])))
+# }
 
-control2<-NULL
-for(a in 0:81){
-  control2<-c(control2,paste0(control[a+1],dir(control[a+1])))
-}
+# images <- gsub("inst/app/images/", "images/", list.dirs("inst/app/images"))
+# images <- images[images != "inst/app/images"]
+
+images <- paste0("images/",
+               list.files("inst/app/images", pattern = "jpg", recursive = T))
+
+images <- unique(gsub("/sideA\\.jpg|/sideB\\.jpg|/target\\.jpg", "", images))
 
 ds <- data.frame(
-  h_id=paste0("images/",c(treated,control2)),
+  # h_id=paste0("images/",c(treated,control2)),
+  h_id = images,
   HD_d=NA, # missing please add (in comments in line 24)
   roof=NA,
   wds=NA, # missing please add
@@ -102,4 +110,4 @@ ds <- data.frame(
   d6=NA
 )
 
-usethis::use_data(ds)
+usethis::use_data(ds, overwrite = T)
